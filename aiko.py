@@ -282,7 +282,7 @@ def norm_select(particles, groups, location, seed, radius=0.01, samples=10): #22
     return ind
 
 
-def orbit(particles, groups, samples=10, interpol="cubic", steps=10, location=None, radius=0.01, seed=None):
+def orbit(particles, groups, samples=10, interpol="quadratic", steps=10, location=None, radius=0.01, seed=None):
     if location == None:
         collection = groups[groups["Mass"] > 100]
         np.random.seed(seed)
@@ -300,7 +300,7 @@ def orbit(particles, groups, samples=10, interpol="cubic", steps=10, location=No
         tdf = pd.DataFrame({"posX":tList[0], "posY":tList[1], "Ra":tList[2]})
         normList.append(tdf)
 
-    if interpol == False:
+    if interpol == "linear":
         line = normList[0]*0
         ax =line.plot(x="posX",y="posY", legend=False)
         for i in normList:
